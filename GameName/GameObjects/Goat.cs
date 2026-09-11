@@ -33,36 +33,22 @@ public class Goat
     // Tracks the position of the character.
     public static Vector2 _goatPosition { get; set; }
 
+    private Vector2 _velocity;
+
     private Sprite _idleSprite;
     private AnimatedSprite _walkAnimation;
     private AnimatedSprite _jumpAnimation;
-
-    //private Animation _harpoonAnimation;
-
-    //private List<Harpoon> _harpoons;
 
     private WalkingDir _goatDir;
 
     private readonly Vector2 SCALE = new Vector2(2.0f, 2.0f);
 
-    //private const int HARPOON_DELAY = 5;
-
     private const float THUMBSTICK_DEADZONE = 0.2f;
 
-    private const float SPEED = 5.0f;
+    private const float SPEED = 10.0f;
 
-    private const float GRAVITY = 50f;
-    private const float JUMP = 15f;
-
-    // private float _immunityDuration = 3.0f; // seconds of immunity
-    // private float _immunityTimer = 0f;
-    // private float _blinkInterval = 0.1f;    // how fast it blinks
-    // private float _blinkTimer = 0f;
-    // private bool _isVisible = true;
-
-    // public bool IsImmune => _immunityTimer > 0f;
-
-    // private SoundEffect _hitSoundEffect;
+    private const float GRAVITY = 5f;
+    private const float JUMP = 50f;
 
     //private int _lives = PlayerStatsManager.currentStats.Lives;
     private int _lives = 50;
@@ -79,6 +65,8 @@ public class Goat
         _goatPosition = new Vector2(
             windowWidth*0.5f, 
             windowHeight-_idleSprite.Height * 0.5f);
+
+        _velocity = new Vector2(0.0f, 0.0f);
 
         previousKeyboardState = Keyboard.GetState();
         previousGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -104,26 +92,8 @@ public class Goat
         TimeSpan speed = TimeSpan.Zero;
 
         speed = new TimeSpan(0, 0, 0, 0, 150);
-        // switch (PlayerStatsManager.currentStats.Speed)
-        // {
-        //     case 5.0f:
-        //         speed = new TimeSpan(0, 0, 0, 0, 150);
-        //     break;
-        //     case 6.5f:
-        //         speed = new TimeSpan(0, 0, 0, 0, 150);
-        //     break;
-        //     case 8.0f:
-        //         speed = new TimeSpan(0, 0, 0, 0, 150);
-        //     break;
-        // }
 
         _walkAnimation.SetDelay(speed);
-
-        //_jumpAnimation = shootingAtlas.CreateAnimatedSprite("shooting-animation");
-        //_jumpAnimation.Scale = SCALE;
-        //_jumpAnimation.CenterOrigin();
-
-        //_harpoonAnimation = new Animation(harpoonFrames, TimeSpan.FromMilliseconds(HARPOON_DELAY));
 
         //_hitSoundEffect = Core.Content.Load<SoundEffect>("audio/Sound effects/Boss hit 1");
 
@@ -134,13 +104,7 @@ public class Goat
         KeyboardState currentKeyboardState = Keyboard.GetState();
         GamePadState currentGamepadState = GamePad.GetState(PlayerIndex.One);
 
-        // Handle shooting (highest priority - interrupts other actions)
-        if (IsJumpingPressed(currentKeyboardState, currentGamepadState))
-        {
-            currentState = GoatState.Jumping;
-            _jumpAnimation.Reset();
-            //Core.Input.GamePads[(int)PlayerIndex.One].SetVibration(0.3f, TimeSpan.FromMilliseconds(250));
-        }
+        Vector2 newPosition = _goatPosition;
 
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -148,6 +112,8 @@ public class Goat
         {
             case GoatState.Jumping:
                 _jumpAnimation.Update(gameTime);
+
+                _velocity.Y += GRAVITY;
 
                 switch(_goatDir)
                 {
@@ -163,48 +129,63 @@ public class Goat
                     break;
                 }
 
-                if (_jumpAnimation.IsComplete)
+                switch(IsCharacterWalking(currentKeyboardState, currentGamepadState))
                 {
-                    // After Jumping, check if moving
-                    currentState = GetWalkingState(currentKeyboardState, currentGamepadState);
+                    case WalkingDir.LEFT:
+                        _goatDir = WalkingDir.LEFT;
+                        _velocity.X = -SPEED;
+                        break;
+                    case WalkingDir.RIGHT:
+                        _goatDir = WalkingDir.RIGHT;
+                        _velocity.X = SPEED;
+                        break;
+                    case WalkingDir.IDLE:
+                    break;
                 }
 
             break;
             case GoatState.Idle:
-
+                _velocity = Vector2.Zero;
+                if (IsJumpingPressed(currentKeyboardState, currentGamepadState))
+                {
+                    currentState = GoatState.Jumping;
+                    _velocity.Y = - JUMP;
+                }
+                else
+                {
+                    currentState = GetWalkingState(currentKeyboardState, currentGamepadState);
+                }  
                 // In case there's an animation for Idle, call update for the nimation here
-
-                currentState = GetWalkingState(currentKeyboardState, currentGamepadState);
-
             break;
 
             case GoatState.Walking:
 
                 _walkAnimation.Update(gameTime);
 
-                Vector2 newPosition = _goatPosition;
-
                 switch(IsCharacterWalking(currentKeyboardState, currentGamepadState))
                 {
                     case WalkingDir.LEFT:
                         _goatDir = WalkingDir.LEFT;
                         currentState = GoatState.Walking;
-                        newPosition.X -= SPEED;
-                        _goatPosition = newPosition;
+                        _velocity.X = -SPEED;
                         _walkAnimation.Effects = SpriteEffects.None;
                         _idleSprite.Effects = SpriteEffects.None;
                         break;
                     case WalkingDir.RIGHT:
                         _goatDir = WalkingDir.RIGHT;
                         currentState = GoatState.Walking;
-                        newPosition.X += SPEED;
-                        _goatPosition = newPosition;
+                        _velocity.X = SPEED;
                         _walkAnimation.Effects = SpriteEffects.FlipHorizontally;
                         _idleSprite.Effects = SpriteEffects.FlipHorizontally;
                         break;
                     case WalkingDir.IDLE:
                         currentState = GoatState.Idle;
                         break;
+                }
+                if (IsJumpingPressed(currentKeyboardState, currentGamepadState))
+                {
+                    currentState = GoatState.Jumping;
+                    _velocity.Y = - JUMP;
                 }
 
             break;
@@ -223,6 +204,8 @@ public class Goat
         // Getting the bounding rectangle for the character
         Rectangle characterBounds = getBounds();
 
+        _goatPosition += _velocity;
+
         Vector2 newCharPosition = _goatPosition;
 
         // Use distance based checks to determine if the character is within the
@@ -231,13 +214,21 @@ public class Goat
         if (characterBounds.Left < screenBounds.Left)
         {
             newCharPosition.X = screenBounds.Left + getWidth() * 0.5f;
-            _goatPosition = newCharPosition;
         }
         else if (characterBounds.Right > screenBounds.Right)
         {
             newCharPosition.X = screenBounds.Right - getWidth() * 0.5f;
-            _goatPosition = newCharPosition;
         }
+        else if(characterBounds.Bottom > screenBounds.Bottom)
+        {
+            newCharPosition.Y = screenBounds.Bottom - _idleSprite.Height * 0.5f;
+            if(currentState == GoatState.Jumping)
+            {
+                _velocity.Y = 0.0f;
+                currentState = GetWalkingState(currentKeyboardState, currentGamepadState);
+            }
+        }
+        _goatPosition = newCharPosition;
     }
 
     public void Draw(SpriteBatch spriteBatch)
