@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using MonoGameLibrary;
 //using GameName.Config;
+using GameName.Scenes;
 using System;
 
 namespace GameName.UI;
@@ -40,8 +41,9 @@ public class TitlePanelManager
 
     public static void HandleStartClicked(object sender, EventArgs e)
     {
+        Core.ChangeScene(new GameScene(0));
         // Set the title panel to be invisible.
-        _titleScreenButtonsPanel.SetIsVisible(false);
+        /*_titleScreenButtonsPanel.SetIsVisible(false);
 
         _newGamePanel.SetIsVisible(false);
 
@@ -52,7 +54,7 @@ public class TitlePanelManager
 
         _newGamePanel.ClearNewGameTextBox();
 
-        _loadGamePanel.SetIsVisible(true);
+        _loadGamePanel.SetIsVisible(true);*/
 
     }
 

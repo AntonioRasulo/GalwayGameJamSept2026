@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Goat/goat_walking</Texture>
+    <Regions>
+        <Region name="walk1" x="3" y="69" width="54" height="48" />
+        <Region name="walk2" x="65" y="69" width="54" height="48" />
+        <Region name="walk3" x="128" y="69" width="54" height="48" />
+        <Region name="walk4" x="192" y="69" width="54" height="48" />
+    </Regions>
+    <Animations>
+        <Animation name="walk-animation" delay="200">
+            <Frame region="walk1" />
+            <Frame region="walk2" />
+            <Frame region="walk3" />
+            <Frame region="walk4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

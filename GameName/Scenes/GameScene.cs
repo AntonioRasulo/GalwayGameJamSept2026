@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Media;
 using GameName.UI;
 using MonoGameGum;
 using GameName.Backgrounds;
+using GameName.GameObjects;
 
 namespace GameName.Scenes;
 
@@ -23,6 +24,8 @@ public class GameScene : Scene
         Playing,
         Paused
     }
+
+    private Goat _goat;
 
     private Rectangle _roomBounds;
 
@@ -50,7 +53,7 @@ public class GameScene : Scene
     private const int PLATF_DESTR_SCORE = 10;
     private const int SCORE_LEVEL = 20;
 
-    private Background _levelBackground;
+    //private Background _levelBackground;
 
     public GameScene(int startingLevel)
     {
@@ -133,6 +136,8 @@ public class GameScene : Scene
             System.Diagnostics.Debug.WriteLine($"Failed to load theme music: {ex.Message}");
         }
 
+        _goat = new Goat();
+
         // Load the font
         _font = Content.Load<SpriteFont>("fonts/04B_30");
 
@@ -169,11 +174,13 @@ public class GameScene : Scene
             return;
         }
 
+        _goat.Update(gameTime);
+
         CollisionChecks();
 
         checkChangeScene();
 
-        _levelBackground.Update(gameTime);
+        //_levelBackground.Update(gameTime);
 
     }
 
@@ -245,7 +252,7 @@ public class GameScene : Scene
             _grayscaleEffect.SetParameter("Saturation", _saturation);
 
             // Draw the background
-            _levelBackground.Draw(_grayscaleEffect.Effect);
+            //_levelBackground.Draw(_grayscaleEffect.Effect);
 
             // And begin the sprite batch using the grayscale effect.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _grayscaleEffect.Effect);
@@ -253,11 +260,13 @@ public class GameScene : Scene
         else
         {
             // Draw the background
-            _levelBackground.Draw();
+            //_levelBackground.Draw();
 
             // Begin the sprite batch to prepare for rendering.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         }
+
+        _goat.Draw(Core.SpriteBatch);
 
         // Always end the sprite batch when finished.
         Core.SpriteBatch.End();

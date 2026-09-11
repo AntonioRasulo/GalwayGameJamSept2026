@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Goat/goat_jumping</Texture>
+    <Regions>
+        <Region name="jump1" x="12" y="71" width="39" height="53" />
+        <Region name="jump2" x="71" y="63" width="48" height="47" />
+        <Region name="jump3" x="132" y="69" width="44" height="38" />
+        <Region name="jump4" x="190" y="77" width="50" height="47" />
+    </Regions>
+    <Animations>
+        <Animation name="jump-animation" delay="200">
+            <Frame region="jump1" />
+            <Frame region="jump2" />
+            <Frame region="jump3" />
+            <Frame region="jump4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

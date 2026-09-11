@@ -1020,6 +1020,36 @@
 /processorParam:TextureFormat=Color
 /build:images/general/www.png
 
+#begin images/Goat/goat_jumping_atlas.xml
+/copy:images/Goat/goat_jumping_atlas.xml
+
+#begin images/Goat/goat_jumping.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Goat/goat_jumping.png
+
+#begin images/Goat/goat_walking_atlas.xml
+/copy:images/Goat/goat_walking_atlas.xml
+
+#begin images/Goat/goat_walking.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Goat/goat_walking.png
+
 #begin images/harpoons/items_100.png
 /importer:TextureImporter
 /processor:TextureProcessor
