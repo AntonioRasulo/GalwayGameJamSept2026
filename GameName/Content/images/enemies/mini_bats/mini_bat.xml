@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/mini_bats/mini bat</Texture>
+    <Regions>
+        <Region name="idle1" x="0" y="8" width="30" height="18" />
+        <Region name="idle2" x="35" y="8" width="25" height="19" />
+        <Region name="idle3" x="67" y="8" width="25" height="19" />
+        <Region name="idle4" x="100" y="8" width="22" height="17" />
+        <Region name="fall1" x="5" y="38" width="24" height="20" />
+        <Region name="fall2" x="35" y="40" width="27" height="20" />
+        <Region name="fall3" x="67" y="40" width="22" height="20" />
+        <Region name="fall4" x="98" y="37" width="22" height="20" />
+        <Region name="land1" x="7" y="81" width="19" height="9" />
+        <Region name="land2" x="40" y="78" width="17" height="12" />
+        <Region name="land3" x="72" y="74" width="17" height="16" />
+        <Region name="land4" x="103" y="77" width="19" height="13" />
+        <Region name="land5" x="136" y="81" width="17" height="9" />
+        <Region name="land6" x="167" y="80" width="18" height="10" />
+        <Region name="land7" x="200" y="80" width="17" height="10" />
+    </Regions>
+    <Animations>
+        <Animation name="idle-animation" delay="200">
+            <Frame region="idle1" />
+            <Frame region="idle2" />
+            <Frame region="idle3" />
+            <Frame region="idle4" />
+        </Animation>
+        <Animation name="fall-animation" delay="75">
+            <Frame region="fall1" />
+            <Frame region="fall2" />
+            <Frame region="fall3" />
+            <Frame region="fall4" />
+        </Animation>
+        <Animation name="land-animation" delay="100">
+            <Frame region="land1" />
+            <Frame region="land2" />
+            <Frame region="land3" />
+            <Frame region="land4" />
+            <Frame region="land5" />
+            <Frame region="land6" />
+            <Frame region="land7" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

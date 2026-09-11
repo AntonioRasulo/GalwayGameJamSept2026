@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/flying_demon/ATTACK</Texture>
+    <Regions>
+        <Region name="attack1" x="7" y="3" width="55" height="67" />
+        <Region name="attack2" x="88" y="1" width="64" height="67" />
+        <Region name="attack3" x="168" y="0" width="64" height="67" />
+        <Region name="attack4" x="244" y="5" width="78" height="67" />
+        <Region name="attack5" x="332" y="2" width="64" height="67" />
+        <Region name="attack6" x="411" y="4" width="69" height="68" />
+        <Region name="attack7" x="492" y="4" width="68" height="68" />
+        <Region name="attack8" x="567" y="4" width="79" height="68" />
+    </Regions>
+    <Animations>
+        <Animation name="attack-animation" delay="90">
+            <Frame region="attack1" />
+            <Frame region="attack2" />
+            <Frame region="attack3" />
+            <Frame region="attack4" />
+            <Frame region="attack5" />
+            <Frame region="attack6" />
+            <Frame region="attack7" />
+            <Frame region="attack8" />
+        </Animation>
+    </Animations>
+</TextureAtlas>
+

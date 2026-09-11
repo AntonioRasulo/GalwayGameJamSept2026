@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/platforms/Platform</Texture>
+        <Regions>
+            <Region name="Breakable1" x="0" y="0" width="27" height="8" />
+            <Region name="Breakable2" x="0" y="8" width="27" height="8" />
+            <Region name="Breakable3" x="0" y="16" width="27" height="8" />
+        </Regions>
+    <Animations>
+
+    </Animations>
+</TextureAtlas>

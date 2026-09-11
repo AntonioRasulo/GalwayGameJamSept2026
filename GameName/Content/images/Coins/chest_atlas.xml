@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Coins/coins-chests-etc-2-0-noborders</Texture>
+    <Regions>
+        <Region name="chest1" x="256" y="546" width="16" height="14" />
+        <Region name="chest2" x="272" y="545" width="16" height="15" />
+        <Region name="chest3" x="288" y="544" width="16" height="16" />
+        <Region name="chest4" x="304" y="543" width="16" height="17" />
+    </Regions>
+    <Animations>
+        <Animation name="chest-animation" delay="200">
+            <Frame region="chest1" />
+            <Frame region="chest2" />
+            <Frame region="chest3" />
+            <Frame region="chest4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>
+
+

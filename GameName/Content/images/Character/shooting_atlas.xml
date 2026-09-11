@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Character/Shooting</Texture>
+    <Regions>
+        <Region name="characterShootingUp1" x="2" y="5" width="23" height="29" />
+        <Region name="characterShootingUp2" x="36" y="5" width="27" height="29" />
+    </Regions>
+    <Animations>
+        <Animation name="shooting-animation" delay="100">
+            <Frame region="characterShootingUp1" />
+            <Frame region="characterShootingUp2" />
+            <Frame region="characterShootingUp2" />
+            <Frame region="characterShootingUp1" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

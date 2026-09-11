@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/flying_demon/DEATH</Texture>
+    <Regions>
+        <Region name="death1" x="4" y="3" width="68" height="66" />
+        <Region name="death2" x="83" y="15" width="61" height="54" />
+        <Region name="death3" x="164" y="15" width="61" height="54" />
+        <Region name="death4" x="244" y="15" width="61" height="54" />
+        <Region name="death5" x="326" y="15" width="61" height="54" />
+        <Region name="death6" x="407" y="15" width="61" height="54" />
+    </Regions>
+    <Animations>
+        <Animation name="death-animation" delay="75">
+            <Frame region="death1" />
+            <Frame region="death2" />
+            <Frame region="death3" />
+            <Frame region="death4" />
+            <Frame region="death5" />
+            <Frame region="death6" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

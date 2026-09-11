@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/Bat</Texture>
+    <Regions>
+        <Region name="idle1" x="3" y="5" width="42" height="37" />
+        <Region name="idle2" x="51" y="6" width="43" height="38" />
+        <Region name="idle3" x="100" y="8" width="42" height="37" />
+        <Region name="idle4" x="147" y="5" width="42" height="37" />
+        <Region name="idle5" x="196" y="5" width="42" height="37" />
+        <Region name="hurt1" x="4" y="51" width="40" height="38" />
+        <Region name="hurt2" x="52" y="52" width="44" height="38" />
+        <Region name="hurt3" x="97" y="52" width="42" height="38" />
+        <Region name="fall1" x="3" y="100" width="42" height="37" />
+        <Region name="fall2" x="52" y="99" width="42" height="37" />
+        <Region name="land1" x="3" y="153" width="39" height="31" />
+        <Region name="land2" x="50" y="168" width="41" height="16" />
+        <Region name="land3" x="99" y="168" width="40" height="16" />
+        <Region name="land4" x="146" y="168" width="40" height="16" />
+        <Region name="land5" x="194" y="168" width="41" height="16" />
+    </Regions>
+    <Animations>
+        <Animation name="idle-animation" delay="75">
+            <Frame region="idle1" />
+            <Frame region="idle2" />
+            <Frame region="idle3" />
+            <Frame region="idle4" />
+            <Frame region="idle5" />
+        </Animation>
+        <Animation name="hurt-animation" delay="200">
+            <Frame region="hurt1" />
+            <Frame region="hurt2" />
+            <Frame region="hurt3" />
+        </Animation>
+        <Animation name="fall-animation" delay="75">
+            <Frame region="fall1" />
+            <Frame region="fall2" />
+        </Animation>
+        <Animation name="land-animation" delay="100">
+            <Frame region="land1" />
+            <Frame region="land2" />
+            <Frame region="land3" />
+            <Frame region="land4" />
+            <Frame region="land5" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

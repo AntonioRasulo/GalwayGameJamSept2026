@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Character/Char</Texture>
+    <Regions>
+        <Region name="char1" x="0" y="0" width="23" height="32" />
+        <Region name="char2" x="28" y="1" width="24" height="31" />
+        <Region name="char3" x="56" y="0" width="23" height="32" />
+        <Region name="char4" x="84" y="1" width="28" height="31" />
+    </Regions>
+    <Animations>
+        <Animation name="walk-animation" delay="200">
+            <Frame region="char1" />
+            <Frame region="char2" />
+            <Frame region="char3" />
+            <Frame region="char4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Items/items</Texture>
+    <Regions>
+        <Region name="Explosion1" x="72" y="682" width="16" height="17" />
+        <Region name="Explosion2" x="49" y="683" width="15" height="15" />
+        <Region name="Explosion3" x="32" y="687" width="9" height="8" />
+    </Regions>
+    <Animations>
+        <Animation name="Explosion-animation" delay="75">
+            <Frame region="Explosion1" />
+            <Frame region="Explosion2" />
+            <Frame region="Explosion3" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

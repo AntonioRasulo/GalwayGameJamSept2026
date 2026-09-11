@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Coins/coins-chests-etc-2-0-noborders</Texture>
+    <Regions>
+        <Region name="gold1" x="177" y="18" width="14" height="14" />
+        <Region name="gold2" x="193" y="18" width="14" height="14" />
+        <Region name="gold3" x="209" y="18" width="14" height="14" />
+        <Region name="gold4" x="225" y="18" width="14" height="14" />
+        <Region name="gold5" x="241" y="18" width="14" height="14" />
+        <Region name="gold6" x="257" y="18" width="14" height="14" />
+        <Region name="gold7" x="273" y="18" width="14" height="14" />
+
+        <Region name="silver1" x="177" y="34" width="14" height="14" />
+        <Region name="silver2" x="193" y="34" width="14" height="14" />
+        <Region name="silver3" x="209" y="34" width="14" height="14" />
+        <Region name="silver4" x="225" y="34" width="14" height="14" />
+        <Region name="silver5" x="241" y="34" width="14" height="14" />
+        <Region name="silver6" x="257" y="34" width="14" height="14" />
+        <Region name="silver7" x="273" y="34" width="14" height="14" />
+
+        <Region name="bronze1" x="177" y="66" width="14" height="14" />
+        <Region name="bronze2" x="193" y="66" width="14" height="14" />
+        <Region name="bronze3" x="209" y="66" width="14" height="14" />
+        <Region name="bronze4" x="225" y="66" width="14" height="14" />
+        <Region name="bronze5" x="241" y="66" width="14" height="14" />
+        <Region name="bronze6" x="257" y="66" width="14" height="14" />
+        <Region name="bronze7" x="273" y="66" width="14" height="14" />
+    </Regions>
+    <Animations>
+        <Animation name="gold-animation" delay="75">
+            <Frame region="gold1" />
+            <Frame region="gold2" />
+            <Frame region="gold3" />
+            <Frame region="gold4" />
+            <Frame region="gold5" />
+            <Frame region="gold6" />
+        </Animation>
+        <Animation name="silver-animation" delay="75">
+            <Frame region="silver1" />
+            <Frame region="silver2" />
+            <Frame region="silver3" />
+            <Frame region="silver4" />
+            <Frame region="silver5" />
+            <Frame region="silver6" />
+            <Frame region="silver7" />
+        </Animation>
+        <Animation name="bronze-animation" delay="75">
+            <Frame region="bronze1" />
+            <Frame region="bronze2" />
+            <Frame region="bronze3" />
+            <Frame region="bronze4" />
+            <Frame region="bronze5" />
+            <Frame region="bronze6" />
+            <Frame region="bronze7" />
+        </Animation>
+    </Animations>
+</TextureAtlas>
+

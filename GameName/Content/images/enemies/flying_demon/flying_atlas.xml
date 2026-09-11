@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/flying_demon/FLYING</Texture>
+    <Regions>
+        <Region name="flying1" x="1" y="5" width="79" height="61" />
+        <Region name="flying2" x="89" y="3" width="65" height="66" />
+        <Region name="flying3" x="168" y="3" width="69" height="62" />
+        <Region name="flying4" x="250" y="5" width="67" height="60" />
+    </Regions>
+    <Animations>
+        <Animation name="flying-animation" delay="75">
+            <Frame region="flying1" />
+            <Frame region="flying2" />
+            <Frame region="flying3" />
+            <Frame region="flying4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

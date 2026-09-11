@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/UI/UI_books_and_more</Texture>
+    <Regions>
+        <Region name="closed-book-blue" x="208" y="63" width="50" height="50" />
+        <Region name="paper-tile-9" x="611" y="83" width="42" height="58" />
+        <Region name="x-icon" x="786" y="226" width="12" height="12"/>
+        <Region name="v-icon" x="769" y="226" width="12" height="12"/>
+    </Regions>
+    <Animations>
+    </Animations>
+</TextureAtlas>

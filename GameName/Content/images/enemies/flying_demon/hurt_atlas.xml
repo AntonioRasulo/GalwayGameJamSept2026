@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/enemies/flying_demon/HURT</Texture>
+    <Regions>
+        <Region name="hurt1" x="8" y="3" width="64" height="66" />
+        <Region name="hurt2" x="87" y="0" width="64" height="66" />
+        <Region name="hurt3" x="169" y="0" width="64" height="64" />
+        <Region name="hurt4" x="250" y="1" width="63" height="68" />
+    </Regions>
+    <Animations>
+        <Animation name="hurt-animation" delay="75">
+            <Frame region="hurt1" />
+            <Frame region="hurt2" />
+            <Frame region="hurt3" />
+            <Frame region="hurt4" />
+        </Animation>
+    </Animations>
+</TextureAtlas>

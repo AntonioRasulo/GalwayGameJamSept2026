@@ -1,0 +1,8 @@
+MonoGameLibrary/bin/*
+MonoGameLibrary/obj/*
+GameName/bin/*
+GameName/obj/*
+GameName/Content/obj/*
+GameName/Content/bin/*
+MonoGameLibrary/SharedContent/obj/*
+MonoGameLibrary/SharedContent/bin/*
