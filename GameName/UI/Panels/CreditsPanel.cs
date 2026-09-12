@@ -46,77 +46,39 @@ public class CreditsPanel : PangPanel
 
         /* Music */
         AddDescriptionText("Music: ", 25.0f, -135.0f);
-        AddContributorText("HydroGene", 25.0f);
-        AddButton("https://hydrogene.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 26.0f, 43.0f);
+        AddContributorText("Zwinzler Games", 25.0f);
+        AddButton("https://zwinzlergames.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 26.0f, 60.0f);
 
         /* Balloon sounds */
-        AddDescriptionText("Game sound effects: ", 35.0f, -82.0f);
-        AddContributorText("JDWasabi", 35.0f, 25.0f);
-        AddButton("https://jdwasabi.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 36.0f, 62.0f);
+        // AddDescriptionText("Game sound effects: ", 35.0f, -82.0f);
+        // AddContributorText("JDWasabi", 35.0f, 25.0f);
+        // AddButton("https://jdwasabi.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 36.0f, 62.0f);
 
         /* Background */
-        AddDescriptionText("Background: ", 45.0f, -114.0f);
-        AddContributorText("Craftpix.net", 45.0f);
-        AddButton("https://free-game-assets.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 46.0f, 50.0f);
+        AddDescriptionText("Background: ", 35.0f, -114.0f);
+        AddContributorText("Craftpix.net", 35.0f);
+        AddButton("https://free-game-assets.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 36.0f, 50.0f);
 
-        /* Coins and chests */
-        AddDescriptionText("Treasures sprites: ", 55.0f, -88.0f);
-        AddContributorText("greatdocbrown", 55.0f, 30.0f);
-        AddButton("https://greatdocbrown.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 56.0f, 88.0f);
-
-        /* Bat sprites */
-        AddDescriptionText("Bat enemies sprites: ", 65.0f, -82f);
-        AddContributorText("Segnah", 65.0f, 12.0f);
-        AddButton("https://segnah.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 66.0f, 41.0f);
-
-        /* Bat boss */
-        AddDescriptionText("Bat boss sprite: ", 75.0f, -96.0f);
-        AddContributorText("Mattz Art", 75.0f, 0.0f);
-        AddButton("https://xzany.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 76.0f, 41.0f);
+        /* Goat design */
+        AddDescriptionText("Goat design: ", 65.0f, -111.0f);
+        AddContributorText("Sevarihk", 65.0f, 0.0f);
+        AddButton("https://opengameart.org/users/sevarihk", wwwLogo, wwwLogo.Bounds, 0.015f, 66.0f, 41.0f);
 
         /* Platforms */
-        AddDescriptionText("Platform sprites: ", 85.0f, -92.0f);
-        AddContributorText("Pixel Frog", 85.0f, 10.0f);
-        AddButton("https://pixelfrog-assets.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 86.0f, 55.0f);
+        AddDescriptionText("Platform sprites: ", 45.0f, -92.0f);
+        AddContributorText("Pixel Frog", 45.0f, 10.0f);
+        AddButton("https://pixelfrog-assets.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 46.0f, 55.0f);
 
-        /* UI arrow */
-        AddDescriptionText("UI Pixel Art: ", 95.0f, -108.0f);
-        AddContributorText("Ibin Games", 95.0f, 0.0f);
-        AddButton("https://ibingames.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 96.0f, 41.0f);
-
-        /* UI x and v buttons */
-        AddDescriptionText("UI Pixel Art: ", 105.0f, -108.0f);
-        AddContributorText("Sr.Toasty", 105.0f, 0.0f);
-        AddButton("https://srtoasty.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 106.0f, 41.0f);
+        /* Flowers design */
+        AddDescriptionText("Flower design: ", 75.0f, -103.0f);
+        AddContributorText("JennPixel", 75.0f, 0.0f);
+        AddButton("https://jennpixel.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 76.0f, 41.0f);
 
         /* UI Controls */
-        AddDescriptionText("Controls Pixel Art: ", 115.0f, -84.0f);
-        AddContributorText("AdamGDA", 115.0f, 20.0f);
-        AddButton("https://adamgamer1111.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 116.0f, 55.0f);
+        AddDescriptionText("Controls Pixel Art: ", 55.0f, -84.0f);
+        AddContributorText("AdamGDA", 55.0f, 20.0f);
+        AddButton("https://adamgamer1111.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 56.0f, 55.0f);
 
-        /* Pixel Art Clock */
-        AddDescriptionText("Clock Pixel Art: ", 125.0f, -96.0f);
-        AddContributorText("Bont", 125.0f, 0.0f);
-        AddButton("https://bontt.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 126.0f, 20.0f);
-
-        /* Pixel Art Dynamite */
-        AddDescriptionText("Dynamite Pixel Art: ", 135.0f, -85.0f);
-        AddContributorText("tumas81", 135.0f, 11.0f);
-        AddButton("https://tumas81.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 136.0f, 43.0f);
-
-        /* Balls Design */
-        AddDescriptionText("Sphere Design: ", 145.0f, -104.0f);
-        AddContributorText("GameSupplyGuy", 145.0f, 0.0f);
-        AddButton("https://gamesupply.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 146.0f, 57.0f);
-
-        /* Pixel Art Shield */
-        AddDescriptionText("Shield Pixel Art: ", 155.0f, -94.0f);
-        AddContributorText("havran", 155.0f, 11.0f);
-        AddButton("https://havran.itch.io/", itchLogo, itchLogo.Bounds, 0.015f, 156.0f, 43.0f);
-
-        /* Character Pixel Art */
-        AddDescriptionText("Character Pixel Art: ", 165.0f, -80.0f);
-        AddContributorText("Abby Sheehan", 165.0f, 45.0f);
     }
 
     public new void SetIsVisible(bool isVisible)

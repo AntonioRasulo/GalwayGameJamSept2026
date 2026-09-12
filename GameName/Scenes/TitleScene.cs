@@ -12,6 +12,7 @@ using GameName.UI;
 using GameName.Backgrounds;
 //using GameName.Config;
 using System.Collections.Generic;
+using GameName.GameObjects;
 
 namespace GameName.Scenes;
 
@@ -20,9 +21,10 @@ public class TitleScene : Scene
     // The font to use to render normal text.
     private SpriteFont _font;
 
-    private Background _levelBackground;
+    private Texture2D _levelBackground;
 
-    private Random _backgroundRand;
+    private Texture2D _goatHead;
+    private Vector2 _goatHeadPosition;
 
     private static bool _volumeInitialized = false;
 
@@ -51,12 +53,12 @@ public class TitleScene : Scene
     public override void LoadContent()
     {
         // Load the font for the standard text.
-        _font = Core.Content.Load<SpriteFont>("fonts/04B_30");
+        _font = Core.Content.Load<SpriteFont>("fonts/mountain_and_nature/Mountain_and_Nature_small");
 
         try
         {
             // Load the background theme music
-            Song theme = Content.Load<Song>("audio/Music/14. Traveling the Sky");
+            Song theme = Content.Load<Song>("audio/Music/3-Fall-evening-zwinzlergames");
             Core.Audio.PlaySong(theme);
         }
         catch (Exception ex)
@@ -64,20 +66,13 @@ public class TitleScene : Scene
             System.Diagnostics.Debug.WriteLine($"Failed to load theme music: {ex.Message}");
         }
 
-        _backgroundRand = new Random();
-        //int backgroundIndex = _backgroundRand.Next(0, LevelRegistry.AllLevels.Count);
+        _levelBackground = Core.Content.Load<Texture2D>("images/backgrounds/backgroundTitle/origbig");
 
-        //List<string> backgroundList = LevelRegistry.AllLevels[backgroundIndex].backgroundStr;
-        List<Texture2D> clouds = new List<Texture2D>();
-
-        // foreach(string backgroundStr in backgroundList)
-        // {
-        //     clouds.Add(Content.Load<Texture2D>(backgroundStr));
-        // }
-
-        _levelBackground = new Background(clouds);
-
-        //PlayerStatsManager.LoadContent();
+        _goatHead = Core.Content.Load<Texture2D>("images/Title/dall-schaf-brown-m");
+        _goatHeadPosition = new Vector2(
+            Core.GraphicsDevice.Viewport.Width * 0.23f + 30.0f,
+            Core.GraphicsDevice.Viewport.Height * 0.12f
+        );
 
         PowerUpSpritesHandler.LoadContent();
 
@@ -88,18 +83,17 @@ public class TitleScene : Scene
         var camera = new SpriteCamera3d();
         _3dMaterial.SetParameter("MatrixTransform", camera.CalculateMatrixTransform());
         _3dMaterial.SetParameter("ScreenSize", new Vector2(Core.GraphicsDevice.Viewport.Width, Core.GraphicsDevice.Viewport.Height));
+
+        Goat.LoadSoundEffects();
     }
 
     public override void Update(GameTime gameTime)
     {
         GumService.Default.Update(gameTime);
 
-        _levelBackground.Update(gameTime);
-
         _3dMaterial.Update();
 
-        double totalSeconds = gameTime.TotalGameTime.TotalSeconds;
-        float spinAmount = (float)Math.Sin(totalSeconds * 0.8) * 0.1f;
+        float spinAmount = -150;
         _3dMaterial.SetParameter("SpinAmount", spinAmount);
 
         TitlePanelManager.Update(gameTime);
@@ -110,12 +104,19 @@ public class TitleScene : Scene
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
         // Draw the background
-        _levelBackground.Draw();
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        Core.SpriteBatch.Draw(_levelBackground, Core.GraphicsDevice.PresentationParameters.Bounds, Color.White);
+        Core.SpriteBatch.End();
 
         // Begin the sprite batch to prepare for rendering.
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp,
-                                rasterizerState: RasterizerState.CullNone,
-                                effect: _3dMaterial.Effect);
+         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp,
+                                 rasterizerState: RasterizerState.CullNone,
+                                 effect: _3dMaterial.Effect);
+
+        if(TitlePanelManager.IsTitlePanelVisible())
+        {
+            Core.SpriteBatch.Draw(_goatHead, _goatHeadPosition, Color.White);
+        }
 
         TitlePanelManager.Draw();
 
@@ -130,9 +131,6 @@ public class TitleScene : Scene
         // Clear out any previous UI in case we came here from
         // a different screen:
         GumService.Default.Root.Children.Clear();
-
-        // Create the directory if it doesn't exist yet
-        //Directory.CreateDirectory(PlayerStatsManager.saveDirectory);
 
         TitlePanelManager.LoadContent();
     }

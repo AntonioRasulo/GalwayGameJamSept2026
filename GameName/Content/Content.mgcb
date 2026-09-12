@@ -31,6 +31,24 @@
 /processorParam:Quality=Best
 /build:audio/Music/16. Battle Theme III (loop).mp3
 
+#begin audio/Music/3-Fall-evening-zwinzlergames.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/Music/3-Fall-evening-zwinzlergames.wav
+
+#begin audio/Music/4-Winter2-night-zwinzlergames.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/Music/4-Winter2-night-zwinzlergames.wav
+
+#begin audio/Music/5-Spring2-anewday-zwinzlergames.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/Music/5-Spring2-anewday-zwinzlergames.wav
+
 #begin audio/Sound effects/Balloon Pop 1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -67,6 +85,36 @@
 /processorParam:Quality=Best
 /build:audio/Sound effects/Fruit collect 1.wav
 
+#begin audio/Sound effects/GoatSound/goat1.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Sound effects/GoatSound/goat1.mp3
+
+#begin audio/Sound effects/GoatSound/goat2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Sound effects/GoatSound/goat2.mp3
+
+#begin audio/Sound effects/GoatSound/goat3.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Sound effects/GoatSound/goat3.mp3
+
+#begin audio/Sound effects/GoatSound/goat4.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Sound effects/GoatSound/goat4.mp3
+
+#begin audio/Sound effects/GoatSound/goat5.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Sound effects/GoatSound/goat5.mp3
+
 #begin effects/grayscaleEffect.fx
 /importer:EffectImporter
 /processor:EffectProcessor
@@ -89,6 +137,47 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:fonts/04B_30.spritefont
+
+#begin fonts/mountain_and_nature/Mountain_and_Nature_small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/mountain_and_nature/Mountain_and_Nature_small.spritefont
+
+#begin fonts/mountain_and_nature/Mountain_and_Nature.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/mountain_and_nature/Mountain_and_Nature.spritefont
+
+#begin fonts/mountain_and_nature/MountainNature.fnt
+/copy:fonts/mountain_and_nature/MountainNature.fnt
+
+#begin fonts/mountain_and_nature/MountainNature.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fonts/mountain_and_nature/MountainNature.png
+
+#begin images/backgrounds/backgroundTitle/origbig.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/backgrounds/backgroundTitle/origbig.png
 
 #begin images/backgrounds/clouds1/1.png
 /importer:TextureImporter
@@ -690,6 +779,30 @@
 /processorParam:TextureFormat=Color
 /build:images/backgrounds/clouds9/5.png
 
+#begin images/backgrounds/fields/origbig.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/backgrounds/fields/origbig.png
+
+#begin images/backgrounds/mountains/origbig.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/backgrounds/mountains/origbig.png
+
 #begin images/balls/Bouncing/BlueBounceBall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -971,6 +1084,90 @@
 
 #begin images/enemies/mini_bats/mini_bat.xml
 /copy:images/enemies/mini_bats/mini_bat.xml
+
+#begin images/Flowers/CosmoOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/CosmoOUTLINED.png
+
+#begin images/Flowers/DaffodilOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/DaffodilOUTLINED.png
+
+#begin images/Flowers/DaisyOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/DaisyOUTLINED.png
+
+#begin images/Flowers/LavenderOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/LavenderOUTLINED.png
+
+#begin images/Flowers/OrchidOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/OrchidOUTLINED.png
+
+#begin images/Flowers/PansyOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/PansyOUTLINED.png
+
+#begin images/Flowers/TulipOUTLINED.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Flowers/TulipOUTLINED.png
 
 #begin images/general/itch_logo.png
 /importer:TextureImporter
@@ -2006,6 +2203,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/PowerUps/shield.png
+
+#begin images/Title/dall-schaf-brown-m.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Title/dall-schaf-brown-m.png
 
 #begin images/UI/All keys and controller icons.png
 /importer:TextureImporter

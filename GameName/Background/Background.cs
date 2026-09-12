@@ -1,3 +1,4 @@
+using FlatRedBall.Glue.StateInterpolation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
@@ -44,6 +45,11 @@ public class Background
         //     (int)_backgroundHeight
         // );
 
+    }
+
+    public Background(Texture2D background)
+    {
+        
     }
 
     public void Update(GameTime gameTime)

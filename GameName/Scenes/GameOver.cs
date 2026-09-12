@@ -38,7 +38,7 @@ public class GameOver : Scene
 
     private Vector2 _pressEnterOrigin;
 
-    private Background _levelBackground;
+    private Texture2D _levelBackground;
 
     private Random _backgroundRand;
 
@@ -59,17 +59,17 @@ public class GameOver : Scene
 
         // Set the position and origin for the game over text.
         Vector2 size = _font5x.MeasureString(GAME_OVER_TEXT);
-        _gameOverTextPosition = new Vector2(640, 100);
+        _gameOverTextPosition = new Vector2(640, 220);
         _gameOverTextOrigin = size * 0.5f;
 
         // Set the position and origin for the score text.
         size = _font5x.MeasureString(SCORE_TEXT);
-        _scoreTextPosition = new Vector2(640, 207);
+        _scoreTextPosition = new Vector2(640, 420);
         _scoreTextOrigin = size * 0.5f;
 
         // Set the position and origin for the press enter text.
         size = _font.MeasureString(PRESS_ENTER_TEXT);
-        _pressEnterPosition = new Vector2(640, 620);
+        _pressEnterPosition = new Vector2(640, 630);
         _pressEnterOrigin = size * 0.5f;
 
     }
@@ -79,7 +79,7 @@ public class GameOver : Scene
         // Load the background theme music
         try
         {
-            Song theme = Content.Load<Song>("audio/Music/15. Volcanic Crater");
+            Song theme = Content.Load<Song>("audio/Music/5-Spring2-anewday-zwinzlergames");
             Core.Audio.PlaySong(theme);
         }
         catch (Exception ex)
@@ -88,10 +88,10 @@ public class GameOver : Scene
         }
 
         // Load the font for the standard text.
-        _font = Core.Content.Load<SpriteFont>("fonts/04B_30");
+        _font = Core.Content.Load<SpriteFont>("fonts/mountain_and_nature/Mountain_and_Nature_small");
 
         // Load the font for the title text.
-        _font5x = Content.Load<SpriteFont>("fonts/04B_30_5x");
+        _font5x = Content.Load<SpriteFont>("fonts/mountain_and_nature/Mountain_and_Nature");
 
         _backgroundRand = new Random();
         //int backgroundIndex = _backgroundRand.Next(0, LevelRegistry.AllLevels.Count);
@@ -99,12 +99,7 @@ public class GameOver : Scene
         //List<string> backgroundList = LevelRegistry.AllLevels[backgroundIndex].backgroundStr;
         List<Texture2D> clouds = new List<Texture2D>();
 
-        // foreach(string backgroundStr in backgroundList)
-        // {
-        //     clouds.Add(Content.Load<Texture2D>(backgroundStr));
-        // }
-
-        _levelBackground = new Background(clouds);
+        _levelBackground = Core.Content.Load<Texture2D>("images/backgrounds/fields/origbig");
 
     }
 
@@ -116,17 +111,16 @@ public class GameOver : Scene
         {
             Core.ChangeScene(new TitleScene());
         }
-        _levelBackground.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
-        _levelBackground.Draw();
-
         // Begin the sprite batch to prepare for rendering.
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        Core.SpriteBatch.Draw(_levelBackground, Core.GraphicsDevice.PresentationParameters.Bounds, Color.White);
 
         // The color to use for the drop shadow text.
         Color dropShadowColor = Color.Black * 0.5f;

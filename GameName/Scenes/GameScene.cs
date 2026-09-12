@@ -14,6 +14,8 @@ using GameName.UI;
 using MonoGameGum;
 using GameName.Backgrounds;
 using GameName.GameObjects;
+using MonoGame_Super_Pang.GameObjects;
+using System.Linq;
 
 namespace GameName.Scenes;
 
@@ -53,7 +55,21 @@ public class GameScene : Scene
     private const int PLATF_DESTR_SCORE = 10;
     private const int SCORE_LEVEL = 20;
 
-    //private Background _levelBackground;
+    private Texture2D _levelBackground;
+    private List<Platform> _platforms;
+
+    private float _timeToGenerateNewPlatform = 4.5f; // Generate a new platform every 4 seconds
+    private float _platformGeneratorTimer = 0.0f;
+
+    private float _timeToIncreasePlatformGravity = 10.0f; // Every 10 seconds increase platform gravity
+    private float _platformGravityTimer = 0.0f;
+
+    private Random _platformRand;
+
+    private Vector2 lastGenPlatformCoord;
+
+    private List<Flower> _flowers;
+    private int _numFlowersPicked = 0;
 
     public GameScene(int startingLevel)
     {
@@ -91,7 +107,6 @@ public class GameScene : Scene
 
         // Create the game scene ui instance.
         _ui = new GameSceneUI();
-        _ui.UpdateMoneyText();
 
         // Subscribe to the events from the game scene ui.
         _ui.ResumeButtonClick += OnResumeButtonClicked;
@@ -128,7 +143,7 @@ public class GameScene : Scene
         try
         {
             // Load the background theme music
-            Song theme = Content.Load<Song>("audio/Music/16. Battle Theme III (loop)");
+            Song theme = Content.Load<Song>("audio/Music/4-Winter2-night-zwinzlergames");
             Core.Audio.PlaySong(theme);
         }
         catch (Exception ex)
@@ -138,8 +153,27 @@ public class GameScene : Scene
 
         _goat = new Goat();
 
+        Platform.LoadContent();
+        Flower.LoadContent();
+
+        _platforms = new List<Platform>();
+        _flowers = new List<Flower>();
+
+        float initialPlatformPosY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight * 0.5f;
+        float initialPlatformPosX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.1f;
+        Vector2 initialPlatformPos = new Vector2(initialPlatformPosX, initialPlatformPosY);
+        _platforms.Add(new UnbreakablePlatform(initialPlatformPos, PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
+        _platforms.Add(new UnbreakablePlatform(initialPlatformPos + new Vector2(250.0f, -100.0f), PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
+        _platforms.Add(new UnbreakablePlatform(initialPlatformPos + new Vector2(400.0f, -250.0f), PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
+
+        _platformRand = new Random();
+
+        lastGenPlatformCoord = initialPlatformPos + new Vector2(400.0f, -250.0f);
+
+        _levelBackground = Core.Content.Load<Texture2D>("images/backgrounds/mountains/origbig");
+
         // Load the font
-        _font = Content.Load<SpriteFont>("fonts/04B_30");
+        _font = Content.Load<SpriteFont>("fonts/mountain_and_nature/Mountain_and_Nature_small");
 
         // Load the grayscale effect.
         _grayscaleEffect = Content.WatchMaterial("effects/grayscaleEffect");
@@ -176,12 +210,75 @@ public class GameScene : Scene
 
         _goat.Update(gameTime);
 
+        foreach(Platform platform in _platforms)
+        {
+            platform.Update(gameTime);
+        }
+
+        foreach(Flower flower in _flowers)
+        {
+            flower.Update(gameTime);
+        }
+
+        _platforms.RemoveAll(platform => platform.toRemove);
+
         CollisionChecks();
+
+        _flowers.RemoveAll(flower => flower.toRemove);
+
+        float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _platformGeneratorTimer += delta;
+
+        if (_platformGeneratorTimer >= _timeToGenerateNewPlatform)
+        {
+            _platformGeneratorTimer = 0;
+            GenerateNewPlatform();
+        }
+
+        _platformGravityTimer += delta;
+
+        if(_platformGravityTimer >= _timeToIncreasePlatformGravity)
+        {
+            _platformGravityTimer = 0;
+            Platform.platformGravity += 0.1f;
+            _timeToGenerateNewPlatform -= 0.2f;
+            if(_timeToGenerateNewPlatform <= 2)
+            {
+                _timeToGenerateNewPlatform = 2f;
+                _goat.jumpStrength += 0.1f;
+            }
+        }
 
         checkChangeScene();
 
-        //_levelBackground.Update(gameTime);
+    }
 
+    private void GenerateNewPlatform()
+    {
+        float lowerBoundX = lastGenPlatformCoord.X - Core.GraphicsDevice.PresentationParameters.BackBufferWidth* 0.3f;
+        if(lowerBoundX < 0)
+        {
+            lowerBoundX = 30.0f;
+        }
+        float upperBoundX = lastGenPlatformCoord.X + Core.GraphicsDevice.PresentationParameters.BackBufferWidth* 0.3f;
+        if(upperBoundX > Core.GraphicsDevice.PresentationParameters.BackBufferWidth)
+        {
+            upperBoundX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth - 30.0f;
+        }
+        int randomX = _platformRand.Next((int)lowerBoundX, (int)upperBoundX);
+
+        Vector2 newPlatformPos = new Vector2(randomX, 0);
+        lastGenPlatformCoord = newPlatformPos;
+
+        _platforms.Add(new UnbreakablePlatform(newPlatformPos, PlatformType.GRAY, PlatformRotation.HORIZONTAL));
+
+        flowerType type = Flower.getRandomType();
+        if(type != flowerType.NONE)
+        {
+            Flower flower = new Flower(type);
+            flower.position = newPlatformPos - new Vector2(0.0f, flower.getBounds().Height);
+            _flowers.Add(flower);
+        }
     }
 
     private void TogglePause()
@@ -209,7 +306,69 @@ public class GameScene : Scene
 
     private void CollisionChecks()
     {
- 
+        Rectangle goatBounds = _goat.getBounds();
+
+        List<float> bottoms = new List<float>();
+        bottoms.Add(Core.GraphicsDevice.PresentationParameters.BackBufferHeight);
+
+        /* Platform Goat Collision */
+        foreach(Platform platform in _platforms)
+        {
+            Rectangle platformBounds = platform.getBounds();
+            if(goatBounds.Bottom <= platformBounds.Top &&
+                checkSetIntersection(goatBounds.Left, goatBounds.Right, platformBounds.Left, platformBounds.Right))
+            {
+                bottoms.Add(platformBounds.Top);
+                if(!platform.jumped)
+                {
+                    platform.jumped = true;
+                    _score++;
+                    _ui.UpdateScoreText(_score);
+                }
+            }
+        }
+
+        _goat.bottomLimit = bottoms.Min();
+
+        /* Goat-Flowers Collision */
+        foreach(Flower flower in _flowers)
+        {
+            Rectangle flowerBounds = flower.getBounds();
+            if((flower.toRemove == false) && (goatBounds.Intersects(flowerBounds)))
+            {
+                Flower.PlayCollectibleSound();
+                _score += 5;
+                _ui.UpdateScoreText(_score);
+                flower.toRemove = true;
+                _numFlowersPicked++;
+                _ui.UpdateFlowerText(_numFlowersPicked);
+            }
+        }
+    
+        /* Game over condition */
+        if(goatBounds.Bottom >= Core.GraphicsDevice.PresentationParameters.BackBufferHeight)
+        {
+            Goat.playGoatSoundEffect();
+            Core.ChangeScene(new GameOver(_score));
+        }
+
+    }
+
+    private bool checkSetIntersection(float l1, float r1, float l2, float r2)
+    {
+        if(l1 >= l2 && r1 <= r2)
+        {
+            return true;
+        }
+        if(l1 <= l2 && r1 >= l2)
+        {
+            return true;
+        }
+        if(l1 <= r2 && r2 <= r1)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void checkChangeScene()
@@ -264,6 +423,17 @@ public class GameScene : Scene
 
             // Begin the sprite batch to prepare for rendering.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        }
+        Core.SpriteBatch.Draw(_levelBackground, Core.GraphicsDevice.PresentationParameters.Bounds, Color.White);
+
+        foreach(Platform platform in _platforms)
+        {
+            platform.Draw();
+        }
+
+        foreach(Flower flower in _flowers)
+        {
+            flower.Draw();
         }
 
         _goat.Draw(Core.SpriteBatch);

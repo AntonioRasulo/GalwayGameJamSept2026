@@ -1,3 +1,4 @@
+using GameName.GameObjects;
 using Gum.Forms.Controls;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +13,7 @@ public class OptionsPanel: PangPanel
     private OptionsSlider musicSlider;
     private AnimatedButton _optionsBackButton;
     private AnimatedButton _controlButton;
-    private AnimatedButton _leaderButton;
+    //private AnimatedButton _leaderButton;
 
     public OptionsPanel()
     {
@@ -69,13 +70,13 @@ public class OptionsPanel: PangPanel
         _optionsBackButton.Click += TitlePanelManager.HandleOptionsButtonBack;
         _panel.AddChild(_optionsBackButton);
 
-        _leaderButton = new AnimatedButton(_GUIatlas);
-        _leaderButton.Text = "LEADERBOARD";
-        _leaderButton.Anchor(Gum.Wireframe.Anchor.Bottom);
-        _leaderButton.Y = -10.0f;
-        _leaderButton.X = 10.0f;
-        _leaderButton.Click += TitlePanelManager.GoToLeaderboard;
-        _panel.AddChild(_leaderButton);
+        // _leaderButton = new AnimatedButton(_GUIatlas);
+        // _leaderButton.Text = "LEADERBOARD";
+        // _leaderButton.Anchor(Gum.Wireframe.Anchor.Bottom);
+        // _leaderButton.Y = -10.0f;
+        // _leaderButton.X = 10.0f;
+        // _leaderButton.Click += TitlePanelManager.GoToLeaderboard;
+        // _panel.AddChild(_leaderButton);
 
         _controlButton = new AnimatedButton(_GUIatlas);
         _controlButton.Text = "CONTROLS";
@@ -127,7 +128,8 @@ public class OptionsPanel: PangPanel
     private void HandleSfxSliderChangeCompleted(object sender, EventArgs e)
     {
         // Play the UI Sound effect so the player can hear the difference in audio.
-        Core.Audio.PlaySoundEffect(TitlePanelManager.uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(TitlePanelManager.uiSoundEffect);
+        Goat.playGoatSoundEffect();
     }
 
     public new void SetIsVisible(bool isVisible)
@@ -135,7 +137,7 @@ public class OptionsPanel: PangPanel
         base.SetIsVisible(isVisible);
         _optionsBackButton.IsFocused = isVisible;
         _controlButton.IsFocused = !isVisible;
-        _leaderButton.IsFocused = !isVisible;
+        //_leaderButton.IsFocused = !isVisible;
     }
 
 }

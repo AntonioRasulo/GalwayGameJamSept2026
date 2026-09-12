@@ -4,6 +4,7 @@ using MonoGameLibrary;
 //using GameName.Config;
 using GameName.Scenes;
 using System;
+using GameName.GameObjects;
 
 namespace GameName.UI;
 
@@ -61,7 +62,8 @@ public class TitlePanelManager
     public static void HandleOptionsClicked(object sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(uiSoundEffect);
+        Goat.playGoatSoundEffect();
 
         // Set the title panel to be invisible.
         _titleScreenButtonsPanel.SetIsVisible(false);
@@ -82,7 +84,8 @@ public class TitlePanelManager
     public static void HandleOptionsButtonBack(object sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(uiSoundEffect);
+        Goat.playGoatSoundEffect();
 
         // Set the options panel to be invisible.
         _optionsPanel.SetIsVisible(false);

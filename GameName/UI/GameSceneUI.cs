@@ -10,6 +10,7 @@ using Gum.Forms.Controls;
 using MonoGameGum.GueDeriving;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using GameName.GameObjects;
 // using GameName.Config;
 // using GameName.GameObjects;
 
@@ -23,9 +24,6 @@ public class GameSceneUI : ContainerRuntime
 
     // The string format to use when updating the text for the time display.
     private static readonly string s_timeFormat = "TIME: {0:D3}";
-
-    // The string format to use when updating the text for the lives display.
-    private static readonly string s_livesFormat = "X{0:D2}";
 
     // The string format to use when updating the text for the lives display.
     private static readonly string s_moneyFormat = "{0:D5}"; 
@@ -59,7 +57,7 @@ public class GameSceneUI : ContainerRuntime
     private TextRuntime _livesText;
 
     // The text runtime used to display the money amount on the pause screen.
-    private TextRuntime _moneyText;
+    private TextRuntime _flowerText;
 
     // Number of seconds on the current level.
     private double _timer;
@@ -80,8 +78,8 @@ public class GameSceneUI : ContainerRuntime
     /// </summary>
     public event EventHandler RetryButtonClick;
 
-    private AnimatedSprite _chestAnimation;
-    private Vector2 _chestAnimationPosition;
+    private Sprite _flowerSprite;
+    private Vector2 _flowerSpritePosition;
 
     public GameSceneUI()
     {
@@ -113,8 +111,8 @@ public class GameSceneUI : ContainerRuntime
 
         // Create the text that will display the lives and add it as
         // a child to this container.
-        _livesText = CreateLivesText();
-        AddChild(_livesText);
+        // _livesText = CreateLivesText();
+        // AddChild(_livesText);
 
         // Create the Pause panel that is displayed when the game is paused and
         // add it as a child to this container
@@ -147,9 +145,9 @@ public class GameSceneUI : ContainerRuntime
         var screenWidth = GumService.Default.CanvasWidth;
         _timer = 0f;
         TextRuntime text = new TextRuntime();
-        text.Anchor(Gum.Wireframe.Anchor.TopLeft);
+        text.Anchor(Gum.Wireframe.Anchor.TopRight);
         text.WidthUnits = DimensionUnitType.RelativeToChildren;
-        text.X = GumService.Default.CanvasWidth * 0.5f;
+        text.X = -20.0f;
         text.Y = 5.0f;
         text.UseCustomFont = true;
         text.CustomFontFile = @"fonts/04b_30.fnt";
@@ -159,20 +157,20 @@ public class GameSceneUI : ContainerRuntime
         return text;
     }
 
-    private TextRuntime CreateLivesText()
-    {
-        var screenWidth = GumService.Default.CanvasWidth;
-        TextRuntime text = new TextRuntime();
-        text.Anchor(Gum.Wireframe.Anchor.TopRight);
-        text.WidthUnits = DimensionUnitType.RelativeToChildren;
-        text.Y = 5.0f;
-        text.UseCustomFont = true;
-        text.CustomFontFile = @"fonts/04b_30.fnt";
-        text.FontScale = 0.25f;
-        text.Text = string.Format(s_livesFormat, 0);
+    // private TextRuntime CreateLivesText()
+    // {
+    //     var screenWidth = GumService.Default.CanvasWidth;
+    //     TextRuntime text = new TextRuntime();
+    //     text.Anchor(Gum.Wireframe.Anchor.TopRight);
+    //     text.WidthUnits = DimensionUnitType.RelativeToChildren;
+    //     text.Y = 5.0f;
+    //     text.UseCustomFont = true;
+    //     text.CustomFontFile = @"fonts/04b_30.fnt";
+    //     text.FontScale = 0.25f;
+    //     text.Text = string.Format(s_livesFormat, 0);
 
-        return text;
-    }
+    //     return text;
+    // }
 
     private Panel CreatePausePanel(TextureAtlas atlas)
     {
@@ -228,28 +226,22 @@ public class GameSceneUI : ContainerRuntime
         panel.AddChild(_quitButton);
 
         var screenWidth = GumService.Default.CanvasWidth;
-        _moneyText = new TextRuntime();
-        _moneyText.Anchor(Gum.Wireframe.Anchor.TopRight);
-        _moneyText.WidthUnits = DimensionUnitType.RelativeToChildren;
-        _moneyText.Y = 15.0f;
-        _moneyText.X = -10.0f;
-        _moneyText.UseCustomFont = true;
-        _moneyText.CustomFontFile = @"fonts/04b_30.fnt";
-        _moneyText.FontScale = 0.25f;
-        _moneyText.Text = string.Format(s_moneyFormat, 0);
+        _flowerText = new TextRuntime();
+        _flowerText.Anchor(Gum.Wireframe.Anchor.TopRight);
+        _flowerText.WidthUnits = DimensionUnitType.RelativeToChildren;
+        _flowerText.Y = 15.0f;
+        _flowerText.X = -10.0f;
+        _flowerText.UseCustomFont = true;
+        _flowerText.CustomFontFile = @"fonts/04b_30.fnt";
+        _flowerText.FontScale = 0.25f;
+        _flowerText.Text = string.Format(s_moneyFormat, 0);
 
-        panel.AddChild(_moneyText);
-
-        TextureAtlas chestAtlas = TextureAtlas.FromFile(Core.Content, "images/Coins/chest_atlas.xml");
-
-        // Get the multi-frame chest animation from the atlas
-        _chestAnimation = chestAtlas.CreateAnimatedSprite("chest-animation");
-        _chestAnimation.Scale = new Vector2(4.0f, 4.0f);
+        panel.AddChild(_flowerText);
 
         float chestAnimationX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.7f;
         float chestAnimationY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight *0.37f;
 
-        _chestAnimationPosition = new Vector2(chestAnimationX, chestAnimationY);
+        _flowerSpritePosition = new Vector2(chestAnimationX, chestAnimationY);
 
         return panel;
     }
@@ -314,7 +306,8 @@ public class GameSceneUI : ContainerRuntime
     private void OnResumeButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        Goat.playGoatSoundEffect();
 
         // Since the resume button was clicked, we need to hide the pause panel.
         HidePausePanel();
@@ -329,7 +322,8 @@ public class GameSceneUI : ContainerRuntime
     private void OnRetryButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        Goat.playGoatSoundEffect();
 
         // Since the retry button was clicked, we need to hide the game over panel.
         HideGameOverPanel();
@@ -344,7 +338,8 @@ public class GameSceneUI : ContainerRuntime
     private void OnQuitButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        Goat.playGoatSoundEffect();
 
         // Both panels have a quit button, so hide both panels
         HidePausePanel();
@@ -361,7 +356,7 @@ public class GameSceneUI : ContainerRuntime
     {
         // A ui element that can receive focus has received focus, play the
         // ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        //Core.Audio.PlaySoundEffect(_uiSoundEffect);
     }
 
     /// <summary>
@@ -379,29 +374,29 @@ public class GameSceneUI : ContainerRuntime
     /// <param name="gametime">A snapshot of the timing values for the current update cycle.</param>
     private void UpdateTimerText(GameTime gameTime)
     {
-        // if((_pausePanel.IsVisible == false) && (FreezeHandler.freezeTimer == 0))
-        // {
-        //     _timer += gameTime.ElapsedGameTime.TotalSeconds;
-        //     _timerText.Text = string.Format(s_timeFormat, (int)_timer);
-        // }
+        if(_pausePanel.IsVisible == false)
+        {
+            _timer += gameTime.ElapsedGameTime.TotalSeconds;
+            _timerText.Text = string.Format(s_timeFormat, (int)_timer);
+        }
     }
 
-    public void UpdateMoneyText()
+    public void UpdateFlowerText(int numFlowers)
     {
-        //_moneyText.Text = string.Format(s_moneyFormat, PlayerStatsManager.currentStats.Money);
+        _flowerText.Text = string.Format(s_moneyFormat, numFlowers);
     }
 
     /// <summary>
     /// Updates the text on the lives display.
     /// </summary>
     /// <param name="lives">Number of lives of the character.</param>
-    public void UpdateLivesText(int lives)
-    {
-        if(_pausePanel.IsVisible == false)
-        {
-            _livesText.Text = string.Format(s_livesFormat, lives);
-        }
-    }
+    // public void UpdateLivesText(int lives)
+    // {
+    //     if(_pausePanel.IsVisible == false)
+    //     {
+    //         _livesText.Text = string.Format(s_livesFormat, lives);
+    //     }
+    // }
 
     /// <summary>
     /// Reset the timer.
@@ -421,6 +416,15 @@ public class GameSceneUI : ContainerRuntime
     /// </summary>
     public void ShowPausePanel()
     {
+        flowerType type = flowerType.NONE;
+        while(type == flowerType.NONE)
+        {
+            type = Flower.getRandomType();
+        }
+
+        _flowerSprite = Flower.GetSprite(type);
+        _flowerSprite.Scale = new Vector2(2.0f, 2.0f);
+
         _pausePanel.IsVisible = true;
 
         // Give the resume button focus for keyboard/gamepad input.
@@ -472,10 +476,6 @@ public class GameSceneUI : ContainerRuntime
     public void Update(GameTime gameTime)
     {
         UpdateTimerText(gameTime);
-        if (_pausePanel.IsVisible)
-        {
-            _chestAnimation.Update(gameTime);
-        }
         GumService.Default.Update(gameTime);
     }
 
@@ -488,7 +488,7 @@ public class GameSceneUI : ContainerRuntime
         if (_pausePanel.IsVisible)
         {
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            _chestAnimation.Draw(Core.SpriteBatch, _chestAnimationPosition);
+            _flowerSprite.Draw(Core.SpriteBatch, _flowerSpritePosition);
             Core.SpriteBatch.End();
         }
     }

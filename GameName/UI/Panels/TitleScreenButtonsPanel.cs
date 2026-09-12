@@ -8,7 +8,7 @@ namespace GameName.UI;
 public class TitleScreenButtonsPanel : PangPanel
 {
 
-    private const string TITLE_TEXT = "Falls\n off\n the\nBalls";
+    private const string TITLE_TEXT = "    Ibex\nSimulator";
 
     // The position to draw the monogame text at.
     private Vector2 _titleTextPos;
@@ -57,11 +57,11 @@ public class TitleScreenButtonsPanel : PangPanel
         _panel.AddChild(_optionsButton);
 
         // Load the font for the title text.
-        _font5x = Core.Content.Load<SpriteFont>("fonts/04B_30_5x");
+        _font5x = Core.Content.Load<SpriteFont>("fonts/mountain_and_nature/Mountain_and_Nature");
 
         // Set the position and origin for the Title text.
         Vector2 size = _font5x.MeasureString(TITLE_TEXT);
-        _titleTextPos = new Vector2(640, 300);
+        _titleTextPos = new Vector2(670, 300);
         _titleTextOrigin = size * 0.5f;
     }
 

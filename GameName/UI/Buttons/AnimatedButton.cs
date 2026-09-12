@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using GameName.GameObjects;
 using Gum.DataTypes;
 using Gum.DataTypes.Variables;
 using Gum.Forms.Controls;
@@ -133,9 +134,9 @@ public class AnimatedButton : Button
         // Add event handler for mouse hover focus.
         buttonVisual.RollOn += HandleRollOn;
 
-        Click += PlaySound;
+        Click += PlayGoatSound;
 
-        GotFocus += PlaySound;
+        //GotFocus += PlaySound;
     }
 
     /// <summary>
@@ -144,6 +145,11 @@ public class AnimatedButton : Button
     protected void HandleRollOn(object sender, EventArgs e)
     {
         IsFocused = true;
+    }
+
+    protected void PlayGoatSound(object sender, EventArgs e)
+    {
+        Goat.playGoatSoundEffect();
     }
 
     protected void PlaySound(object sender, EventArgs e)

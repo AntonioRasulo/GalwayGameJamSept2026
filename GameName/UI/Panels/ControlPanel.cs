@@ -24,7 +24,7 @@ public class ControlPanel: PangPanel
         MovementText.Y = 50.0f;
         _panel.AddChild(MovementText);
 
-        GameText ShootingText = InitializeText("Shooting");
+        GameText ShootingText = InitializeText("Jumping");
         ShootingText.X = 10.0f;
         ShootingText.Y = 125.0f;
         _panel.AddChild(ShootingText);
