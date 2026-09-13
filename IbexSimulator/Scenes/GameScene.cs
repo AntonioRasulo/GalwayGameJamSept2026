@@ -331,7 +331,7 @@ public class GameScene : Scene
         if(goatBounds.Bottom >= Core.GraphicsDevice.PresentationParameters.BackBufferHeight)
         {
             Goat.playGoatSoundEffect();
-            Core.ChangeScene(new GameOver(_score));
+            Core.ChangeScene(new GameOver(_score, _numFlowersPicked));
         }
 
     }

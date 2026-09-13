@@ -212,10 +212,10 @@ public class GameSceneUI : ContainerRuntime
 
         panel.AddChild(_flowerText);
 
-        float flowerAnimationX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.7f;
-        float flowerAnimationY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight *0.37f;
+        float flowerX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.7f;
+        float flowerY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight *0.37f;
 
-        _flowerSpritePosition = new Vector2(flowerAnimationX, flowerAnimationY);
+        _flowerSpritePosition = new Vector2(flowerX, flowerY);
 
         return panel;
     }

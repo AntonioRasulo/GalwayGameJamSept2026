@@ -6,6 +6,8 @@ using MonoGameLibrary;
 using MonoGameLibrary.Scenes;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using MonoGameLibrary.Graphics;
+using IbexGame.GameObjects;
 
 namespace IbexGame.Scenes;
 
@@ -14,6 +16,8 @@ public class GameOver : Scene
     private const string GAME_OVER_TEXT = "GAME OVER";
 
     private string SCORE_TEXT = "Score: ";
+
+    private string FLOWER_TEXT = "Flowers: ";
 
     private const string PRESS_ENTER_TEXT = "Press Confirm To Continue";
 
@@ -31,15 +35,23 @@ public class GameOver : Scene
 
     private Vector2 _scoreTextOrigin;
 
+    private Vector2 _flowerTextPosition;
+
+    private Vector2 _flowerTextOrigin;
+
     private Vector2 _pressEnterPosition;
 
     private Vector2 _pressEnterOrigin;
 
     private Texture2D _levelBackground;
 
-    public GameOver(int score)
+    private Sprite _flowerSprite;
+    private Vector2 _flowerSpritePosition;
+
+    public GameOver(int score, int numFlowers)
     {
         SCORE_TEXT += score.ToString();
+        FLOWER_TEXT += numFlowers.ToString();
     }
 
     public override void Initialize()
@@ -53,18 +65,36 @@ public class GameOver : Scene
 
         // Set the position and origin for the game over text.
         Vector2 size = _font5x.MeasureString(GAME_OVER_TEXT);
-        _gameOverTextPosition = new Vector2(640, 220);
+        _gameOverTextPosition = new Vector2(640, 120);
         _gameOverTextOrigin = size * 0.5f;
 
         // Set the position and origin for the score text.
         size = _font5x.MeasureString(SCORE_TEXT);
-        _scoreTextPosition = new Vector2(640, 420);
+        _scoreTextPosition = new Vector2(640, 320);
         _scoreTextOrigin = size * 0.5f;
+
+        size = _font5x.MeasureString(FLOWER_TEXT);
+        _flowerTextPosition = new Vector2(640, 520);
+        _flowerTextOrigin = size * 0.5f;
 
         // Set the position and origin for the press enter text.
         size = _font.MeasureString(PRESS_ENTER_TEXT);
         _pressEnterPosition = new Vector2(640, 630);
         _pressEnterOrigin = size * 0.5f;
+
+        flowerType type = flowerType.NONE;
+        while(type == flowerType.NONE)
+        {
+            type = Flower.getRandomType();
+        }
+
+        _flowerSprite = Flower.GetSprite(type);
+        _flowerSprite.Scale = new Vector2(4.0f, 4.0f);
+
+        float flowerX = 980.0f;
+        float flowerY = 450.0f;
+
+        _flowerSpritePosition = new Vector2(flowerX, flowerY);
 
     }
 
@@ -129,8 +159,14 @@ public class GameOver : Scene
         // Draw the Slime text on top of that at its original position.
         Core.SpriteBatch.DrawString(_font5x, SCORE_TEXT, _scoreTextPosition, Color.White, 0.0f, _scoreTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
+        Core.SpriteBatch.DrawString(_font5x, FLOWER_TEXT, _flowerTextPosition + new Vector2(10, 10), dropShadowColor, 0.0f, _flowerTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+
+        Core.SpriteBatch.DrawString(_font5x, FLOWER_TEXT, _flowerTextPosition, Color.White, 0.0f, _flowerTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+
         // Draw the press enter text.
         Core.SpriteBatch.DrawString(_font, PRESS_ENTER_TEXT, _pressEnterPosition, Color.White, 0.0f, _pressEnterOrigin, 1.0f, SpriteEffects.None, 0.0f);
+
+        _flowerSprite.Draw(Core.SpriteBatch, _flowerSpritePosition);
 
         // Always end the sprite batch when finished.
         Core.SpriteBatch.End();
