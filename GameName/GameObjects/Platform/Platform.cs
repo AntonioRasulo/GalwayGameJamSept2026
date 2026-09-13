@@ -44,7 +44,7 @@ abstract public class Platform
 
     public bool jumped = false;
 
-    static public float platformGravity = 0.5f;
+    static public float platformGravity;
 
     public Platform(Vector2 position, PlatformType platformType, PlatformRotation rotation)
     {
@@ -109,6 +109,11 @@ abstract public class Platform
         {
             toRemove = true;
         }
+    }
+
+    public static void restoreGravity()
+    {
+        platformGravity = 0.5f;
     }
 
 }

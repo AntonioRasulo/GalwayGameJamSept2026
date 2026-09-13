@@ -219,11 +219,6 @@ public class Goat
             Core.GraphicsDevice.PresentationParameters.BackBufferHeight
         );
 
-        // Getting the bounding rectangle for the character
-        //Rectangle characterBounds = getBounds();
-
-        //_goatPosition += _velocity;
-
         Vector2 newCharPosition = _goatPosition + _velocity;
         Rectangle characterBounds = getBounds(newCharPosition);
 
@@ -233,21 +228,20 @@ public class Goat
         if (characterBounds.Right < screenBounds.Left)
         {
             newCharPosition.X = screenBounds.Right - getWidth() * 0.5f;
+            newCharPosition.Y -= jumpStrength;
         }
         else if (characterBounds.Left > screenBounds.Right)
         {
             newCharPosition.X = screenBounds.Left + getWidth() * 0.5f;
+            newCharPosition.Y -= jumpStrength;
         }
 
-        //if(characterBounds.Bottom > screenBounds.Bottom)
         if (characterBounds.Bottom > bottomLimit)
         {
             _velocity.Y = 0.0f;
-            //newCharPosition.Y = screenBounds.Bottom - _idleSprite.Height * 0.5f;
             newCharPosition.Y = bottomLimit  - _idleSprite.Height * 0.5f;
             if(currentState == GoatState.Jumping)
             {
-                //_velocity.Y = 0.0f;
                 currentState = GetWalkingState(currentKeyboardState, currentGamepadState);
             }
         }

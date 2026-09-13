@@ -74,6 +74,7 @@ public class GameScene : Scene
     public GameScene(int startingLevel)
     {
         _currentLevelIndex = startingLevel;
+        Platform.restoreGravity();
     }
 
     public override void Initialize()
@@ -256,16 +257,21 @@ public class GameScene : Scene
     private void GenerateNewPlatform()
     {
         float lowerBoundX = lastGenPlatformCoord.X - Core.GraphicsDevice.PresentationParameters.BackBufferWidth* 0.3f;
-        if(lowerBoundX < 0)
-        {
-            lowerBoundX = 30.0f;
-        }
+
         float upperBoundX = lastGenPlatformCoord.X + Core.GraphicsDevice.PresentationParameters.BackBufferWidth* 0.3f;
-        if(upperBoundX > Core.GraphicsDevice.PresentationParameters.BackBufferWidth)
-        {
-            upperBoundX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth - 30.0f;
-        }
+
         int randomX = _platformRand.Next((int)lowerBoundX, (int)upperBoundX);
+
+        int platformSize = 23*4;
+
+        if(randomX > Core.GraphicsDevice.PresentationParameters.BackBufferWidth - platformSize)
+        {
+            randomX = platformSize;
+        }
+        else if (randomX < platformSize)
+        {
+            randomX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth - platformSize;
+        }
 
         Vector2 newPlatformPos = new Vector2(randomX, 0);
         lastGenPlatformCoord = newPlatformPos;

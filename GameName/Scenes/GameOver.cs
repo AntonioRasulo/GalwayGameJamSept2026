@@ -106,7 +106,7 @@ public class GameOver : Scene
     public override void Update(GameTime gameTime)
     {
         // If the user presses enter, switch to the game scene.
-        if (Core.Input.Keyboard.WasKeyJustReleased(Keys.Enter) ||
+        if (Core.Input.Keyboard.WasKeyJustReleased(Keys.Space) || Core.Input.Keyboard.WasKeyJustReleased(Keys.Enter) ||
             Core.Input.GamePads[(int)PlayerIndex.One].WasButtonJustReleased(Buttons.A))
         {
             Core.ChangeScene(new TitleScene());
