@@ -6,9 +6,6 @@ using MonoGameLibrary;
 using MonoGameLibrary.Scenes;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
-//using GameName.Config;
-using GameName.Backgrounds;
-//using GameName.UI;
 
 namespace GameName.Scenes;
 

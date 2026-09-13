@@ -38,14 +38,4 @@ public abstract class PangPanel
         _panel.IsVisible = isVisible;
     }
 
-    public void AddChild(LoadButton child)
-    {
-        _panel.AddChild(child);
-    }
-
-    public Gum.Wireframe.InteractiveGue Visual()
-    {
-        return _panel.Visual;
-    }
-
 }

@@ -1,11 +1,9 @@
 using Gum.Forms.Controls;
 using Gum.Forms.DefaultVisuals.V3;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameGum.GueDeriving;
-using MonoGameGum.Input;
 using System;
 
 namespace GameName.UI;

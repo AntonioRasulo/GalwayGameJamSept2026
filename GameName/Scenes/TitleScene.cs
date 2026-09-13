@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
@@ -9,9 +8,6 @@ using MonoGameLibrary.Scenes;
 using Microsoft.Xna.Framework.Media;
 using MonoGameGum;
 using GameName.UI;
-using GameName.Backgrounds;
-//using GameName.Config;
-using System.Collections.Generic;
 using GameName.GameObjects;
 
 namespace GameName.Scenes;
@@ -74,8 +70,6 @@ public class TitleScene : Scene
             Core.GraphicsDevice.Viewport.Height * 0.12f
         );
 
-        PowerUpSpritesHandler.LoadContent();
-
         // Load the 3d effect 
         _3dMaterial = Core.SharedContent.WatchMaterial("effects/3dEffect");
         _3dMaterial.IsDebugVisible = false;
@@ -95,8 +89,6 @@ public class TitleScene : Scene
 
         float spinAmount = -150;
         _3dMaterial.SetParameter("SpinAmount", spinAmount);
-
-        TitlePanelManager.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)

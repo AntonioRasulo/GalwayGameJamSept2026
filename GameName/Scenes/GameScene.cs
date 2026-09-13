@@ -6,15 +6,11 @@ using MonoGameLibrary;
 using MonoGameLibrary.Content;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Scenes;
-// using GameName.GameObjects;
-// using GameName.Config;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
 using GameName.UI;
 using MonoGameGum;
-using GameName.Backgrounds;
 using GameName.GameObjects;
-using MonoGame_Super_Pang.GameObjects;
 using System.Linq;
 
 namespace GameName.Scenes;
@@ -163,9 +159,9 @@ public class GameScene : Scene
         float initialPlatformPosY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight * 0.5f;
         float initialPlatformPosX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.1f;
         Vector2 initialPlatformPos = new Vector2(initialPlatformPosX, initialPlatformPosY);
-        _platforms.Add(new UnbreakablePlatform(initialPlatformPos, PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
-        _platforms.Add(new UnbreakablePlatform(initialPlatformPos + new Vector2(250.0f, -100.0f), PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
-        _platforms.Add(new UnbreakablePlatform(initialPlatformPos + new Vector2(400.0f, -250.0f), PlatformType.CARAMEL, PlatformRotation.HORIZONTAL));
+        _platforms.Add(new Platform(initialPlatformPos));
+        _platforms.Add(new Platform(initialPlatformPos + new Vector2(250.0f, -100.0f)));
+        _platforms.Add(new Platform(initialPlatformPos + new Vector2(400.0f, -250.0f)));
 
         _platformRand = new Random();
 
@@ -249,9 +245,6 @@ public class GameScene : Scene
                 _goat.jumpStrength += 0.1f;
             }
         }
-
-        checkChangeScene();
-
     }
 
     private void GenerateNewPlatform()
@@ -264,19 +257,15 @@ public class GameScene : Scene
 
         int platformSize = 23*4;
 
-        if(randomX > Core.GraphicsDevice.PresentationParameters.BackBufferWidth - platformSize)
+        while((randomX > Core.GraphicsDevice.PresentationParameters.BackBufferWidth - platformSize) ||  (randomX < platformSize))
         {
-            randomX = platformSize;
-        }
-        else if (randomX < platformSize)
-        {
-            randomX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth - platformSize;
+            randomX = _platformRand.Next((int)lowerBoundX, (int)upperBoundX);
         }
 
         Vector2 newPlatformPos = new Vector2(randomX, 0);
         lastGenPlatformCoord = newPlatformPos;
 
-        _platforms.Add(new UnbreakablePlatform(newPlatformPos, PlatformType.GRAY, PlatformRotation.HORIZONTAL));
+        _platforms.Add(new Platform(newPlatformPos));
 
         flowerType type = Flower.getRandomType();
         if(type != flowerType.NONE)
@@ -377,36 +366,6 @@ public class GameScene : Scene
         return false;
     }
 
-    private void checkChangeScene()
-    {
-
-    }
-
-    private bool areIntersecting(Circle circle, Rectangle rectangle)
-    {
-        int distanceX = Math.Abs(circle.X - rectangle.Center.X);
-        int distanceY = Math.Abs(circle.Y - rectangle.Center.Y);
-
-        float halfRectWidth = rectangle.Width * 0.5f;
-        float halfRectHeight = rectangle.Height * 0.5f;
-
-        if((distanceX > (halfRectWidth + circle.Radius)) ||
-           (distanceY > (halfRectHeight + circle.Radius)))
-        {
-            return false;
-        }
-
-        if(distanceX <= halfRectWidth ||
-           distanceY <= halfRectHeight)
-        {
-            return true;
-        }
-
-        double cornerDistanceSquare = Math.Pow(distanceX-halfRectWidth, 2) + Math.Pow(distanceY-halfRectHeight, 2);
-
-        return cornerDistanceSquare <= Math.Pow(circle.Radius, 2);
-    }
-
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(Color.White);
@@ -416,17 +375,11 @@ public class GameScene : Scene
             // We are in a game over state, so apply the saturation parameter.
             _grayscaleEffect.SetParameter("Saturation", _saturation);
 
-            // Draw the background
-            //_levelBackground.Draw(_grayscaleEffect.Effect);
-
             // And begin the sprite batch using the grayscale effect.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _grayscaleEffect.Effect);
         }
         else
         {
-            // Draw the background
-            //_levelBackground.Draw();
-
             // Begin the sprite batch to prepare for rendering.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         }
@@ -451,11 +404,6 @@ public class GameScene : Scene
         _ui.Draw();
 
         base.Draw(gameTime);
-    }
-
-    private void LoadLevel()
-    {
-
     }
 
 }

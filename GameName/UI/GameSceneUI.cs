@@ -54,7 +54,7 @@ public class GameSceneUI : ContainerRuntime
     private TextRuntime _timerText;
 
     // The text runtime used to display the lives on the game screen.
-    private TextRuntime _livesText;
+    //private TextRuntime _livesText;
 
     // The text runtime used to display the money amount on the pause screen.
     private TextRuntime _flowerText;

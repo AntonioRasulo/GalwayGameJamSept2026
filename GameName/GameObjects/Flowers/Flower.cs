@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame_Super_Pang.GameObjects;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using System;
