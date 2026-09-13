@@ -23,7 +23,7 @@ public class GameSceneUI : ContainerRuntime
     private static readonly string s_timeFormat = "TIME: {0:D3}";
 
     // The string format to use when updating the text for the lives display.
-    private static readonly string s_moneyFormat = "{0:D5}"; 
+    private static readonly string s_flowerFormat = "{0:D5}"; 
 
     // The sound effect to play for auditory feedback of the user interface.
     //private SoundEffect _uiSoundEffect;
@@ -53,7 +53,7 @@ public class GameSceneUI : ContainerRuntime
     // The text runtime used to display the lives on the game screen.
     //private TextRuntime _livesText;
 
-    // The text runtime used to display the money amount on the pause screen.
+    // The text runtime used to display the flowers amount on the pause screen.
     private TextRuntime _flowerText;
 
     // Number of seconds on the current level.
@@ -208,14 +208,14 @@ public class GameSceneUI : ContainerRuntime
         _flowerText.UseCustomFont = true;
         _flowerText.CustomFontFile = @"fonts/04b_30.fnt";
         _flowerText.FontScale = 0.25f;
-        _flowerText.Text = string.Format(s_moneyFormat, 0);
+        _flowerText.Text = string.Format(s_flowerFormat, 0);
 
         panel.AddChild(_flowerText);
 
-        float chestAnimationX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.7f;
-        float chestAnimationY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight *0.37f;
+        float flowerAnimationX = Core.GraphicsDevice.PresentationParameters.BackBufferWidth * 0.7f;
+        float flowerAnimationY = Core.GraphicsDevice.PresentationParameters.BackBufferHeight *0.37f;
 
-        _flowerSpritePosition = new Vector2(chestAnimationX, chestAnimationY);
+        _flowerSpritePosition = new Vector2(flowerAnimationX, flowerAnimationY);
 
         return panel;
     }
@@ -345,7 +345,7 @@ public class GameSceneUI : ContainerRuntime
 
     public void UpdateFlowerText(int numFlowers)
     {
-        _flowerText.Text = string.Format(s_moneyFormat, numFlowers);
+        _flowerText.Text = string.Format(s_flowerFormat, numFlowers);
     }
 
     /// <summary>
