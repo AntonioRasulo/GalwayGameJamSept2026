@@ -113,7 +113,7 @@ public static class ContentManagerExtensions
         var process = Process.Start(new ProcessStartInfo
         {
             FileName = "dotnet",
-            Arguments = "build GameName.csproj -t:WatchContent --tl:off",
+            Arguments = "build IbexSimulator.csproj -t:WatchContent --tl:off",
             WorkingDirectory = projectDirectory,
             WindowStyle = ProcessWindowStyle.Normal,
             UseShellExecute = false,
